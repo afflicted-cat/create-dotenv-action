@@ -1,0 +1,32 @@
+{
+  "name": "create-dotenv-action",
+  "version": "1.0.0",
+  "description": "Easy way to create .env file for github actions",
+  "main": "src/index.js",
+  "author": "weyheyhey <iweyheyhey@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weyheyhey/create-dotenv-action.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "ncc build ./src/index.js",
+    "test": "run-p test:*",
+    "test:code": "jest --passWithNoTests",
+    "test:lint": "eslint . --ext .js",
+    "preversion": "npm run build",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@vercel/ncc": "^0.28.5",
+    "@wowvendor/commitlint-config": "^2.0.0",
+    "@wowvendor/eslint-config-base": "^2.4.0",
+    "cz-customizable": "^6.3.0",
+    "eslint": "^7.26.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1"
+  }
+}
