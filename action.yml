@@ -1,0 +1,18 @@
+name: "Easy dotenv creation"
+description: "This action creates a .env file and provides secrets to it"
+author: "weyheyhey"
+branding:
+  icon: file-text
+  color: yellow
+inputs:
+  filename:
+    description: "The name of the file to be created"
+    required: false
+    default: ".env"
+  wildecard:
+    description: "The key that env variables must start with to get into the .env file"
+    required: false
+    default: "^"
+runs:
+  using: "node12"
+  main: "dist/index.js"

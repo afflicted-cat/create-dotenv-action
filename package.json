@@ -17,6 +17,9 @@
     "preversion": "npm run build",
     "postinstall": "husky install"
   },
+  "dependencies": {
+    "@actions/core": "^1.2.7"
+  },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@vercel/ncc": "^0.28.5",
