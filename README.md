@@ -1,5 +1,7 @@
 # Create Dotenv Action
 
+[![Tests](https://github.com/weyheyhey/create-dotenv-action/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/weyheyhey/create-dotenv-action/actions/workflows/tests.yml)
+
 The action looks for env variables starting with `^` and creates an env file, writing the found variables into it, discarding the `^` character
 
 ## Usage
