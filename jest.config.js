@@ -2,6 +2,8 @@
 // https://jestjs.io/docs/en/configuration.html
 
 module.exports = {
+  silent: true,
+  clearMocks: true,
   collectCoverage: false,
   testEnvironment: "node",
   moduleFileExtensions: ["js"],

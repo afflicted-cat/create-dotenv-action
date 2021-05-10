@@ -395,6 +395,54 @@ exports.toCommandValue = toCommandValue;
 
 /***/ }),
 
+/***/ 483:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const core = __nccwpck_require__(186);
+const path = __nccwpck_require__(622);
+const fs = __nccwpck_require__(747);
+
+module.exports = { createDotenv };
+
+function createDotenv() {
+  try {
+    const wildecard = core.getInput("wildecard");
+    const filename = core.getInput("filename");
+    const wildecardLength = wildecard.length;
+    const originalVariables = {};
+    let envContent = "";
+
+    for (const key of Object.keys(process.env)) {
+      if (key.startsWith(wildecard)) {
+        const realKey = key.slice(wildecardLength);
+        const value = process.env[key];
+
+        originalVariables[key] = value;
+        envContent += `${realKey}=${value}\n`;
+      }
+    }
+
+    const envKeys = Object.keys(originalVariables);
+
+    console.log(`Found ${envKeys.length} variables starting with ${wildecard}`);
+
+    const filePath = path.join(process.env.GITHUB_WORKSPACE, filename);
+
+    if (fs.existsSync(filePath)) {
+      throw new Error(`File "${filePath}" already exists. Use a different name for the generated file`);
+    }
+
+    fs.writeFileSync(filePath, envContent, { encoding: "utf-8" });
+
+    console.log(`File "${filename}" successfully created`);
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
+
+/***/ }),
+
 /***/ 747:
 /***/ ((module) => {
 
@@ -458,43 +506,9 @@ module.exports = require("path");;
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(186);
-const path = __nccwpck_require__(622);
-const fs = __nccwpck_require__(747);
+const { createDotenv } = __nccwpck_require__(483);
 
-try {
-  const wildecard = core.getInput("wildecard");
-  const filename = core.getInput("filename");
-  const wildecardLength = wildecard.length;
-  const originalVariables = {};
-  let envContent = "";
-
-  for (const key of Object.keys(process.env)) {
-    if (key.startsWith(wildecard)) {
-      const realKey = key.slice(wildecardLength);
-      const value = process.env[key];
-
-      originalVariables[key] = value;
-      envContent += `${realKey}=${value}\n`;
-    }
-  }
-
-  const envKeys = Object.keys(originalVariables);
-
-  console.log(`Found ${envKeys.length} variables starting with ${wildecard}`);
-
-  const filePath = path.join(process.env.GITHUB_WORKSPACE, filename);
-
-  if (fs.existsSync(filePath)) {
-    throw new Error(`File "${filePath}" already exists. Use a different name for the generated file`);
-  }
-
-  fs.writeFileSync(filePath, envContent, { encoding: "utf-8" });
-
-  console.log(`File "${filename}" successfully created`);
-} catch (error) {
-  core.setFailed(error.message);
-}
+createDotenv();
 
 })();
 
