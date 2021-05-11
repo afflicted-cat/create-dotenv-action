@@ -3,7 +3,7 @@ const { vol } = require("memfs");
 
 const { createDotenv } = require("../create-dotenv");
 
-jest.mock("fs");
+jest.mock("fs", () => require("memfs").fs);
 
 jest.mock("@actions/core", () => ({
   setFailed: jest.fn(),
