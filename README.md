@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Create .env.production
-        uses: weyheyhey/create-dotenv-action@1
+        uses: weyheyhey/create-dotenv-action@v1
         with:
           wildecard: "^"
           filename: ".env.production"
