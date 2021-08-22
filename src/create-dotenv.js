@@ -8,6 +8,7 @@ function createDotenv() {
   try {
     const wildecard = core.getInput("wildecard");
     const filename = core.getInput("filename");
+    const separator = core.getInput("separator", { trimWhitespace: false });
     const wildecardLength = wildecard.length;
     const originalVariables = {};
     let envContent = "";
@@ -18,7 +19,7 @@ function createDotenv() {
         const value = process.env[key];
 
         originalVariables[key] = value;
-        envContent += `${realKey}=${value}\n`;
+        envContent += `${realKey}${separator}${value}\n`;
       }
     }
 

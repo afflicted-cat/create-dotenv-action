@@ -60,3 +60,24 @@ When writing variables to a `.env` file, this value will be discarded. For examp
 ENV_ONE=value-one
 ENV_TWO=value-two
 ```
+
+### `separator`
+
+- Default: "="
+
+Separator between key and value
+
+```yaml
+with:
+  separator: ": "
+  env:
+    ^ENV_ONE: value-one
+    ^ENV_TWO: ${{ secrets.ENV_TWO }}
+```
+
+For the previous config, the following file will be generated:
+
+```dotenv
+ENV_ONE: value-one
+ENV_TWO: value-two
+```

@@ -13,6 +13,10 @@ inputs:
     description: "The key that env variables must start with to get into the .env file"
     required: false
     default: "^"
+  separator:
+    description: "Between key and value"
+    required: false
+    default: "="    
 runs:
   using: "node12"
   main: "dist/index.js"
